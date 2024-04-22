@@ -22,12 +22,12 @@ a,
 }
 
 @media (min-width: 1024px) {
-  /* body {
-    display: flex;
-    place-items: center;
-  } */
+  main {
+    padding: 2ch;
+  }
 
   #app {
+    padding: 0;
     display: flex;
     flex-direction: column;
   }

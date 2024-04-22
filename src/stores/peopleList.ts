@@ -18,6 +18,8 @@ export const usePeopleListStore = defineStore('people', () => {
   }
 
   function populateList() {
+    people.value.splice(0, people.value.length);
+
     for (let index = 0; index < 10; index++) {
       const person: Person = {
         firstName: faker.person.firstName(),

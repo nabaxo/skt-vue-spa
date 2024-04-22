@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import { usePeopleListStore } from './stores/peopleList'
-import { onMounted } from 'vue'
 
 onMounted(() => {
   usePeopleListStore().populateList()
@@ -11,12 +11,10 @@ onMounted(() => {
 
 <template>
   <header>
-    <div class="wrapper">
-      <nav class="bg-gray-800">
-        <RouterLink class="text-blue-600" to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+    <nav class="bg-gray-800">
+      <RouterLink class="text-blue-600" to="/">Home</RouterLink>
+      <RouterLink to="/edit">Add New</RouterLink>
+    </nav>
   </header>
 
   <RouterView />
