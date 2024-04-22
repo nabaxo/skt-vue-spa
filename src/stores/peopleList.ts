@@ -1,0 +1,40 @@
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
+import { faker } from '@faker-js/faker';
+
+export const usePeopleListStore = defineStore('people', () => {
+  const people = ref<Person[]>([]);
+
+  function addPerson(newPerson: Person) {
+    people.value.push(newPerson);
+  }
+
+  function removePerson(p: Person) {
+    people.value.splice(people.value.indexOf(p), 1);
+  }
+
+  function editPerson(p: Person) {
+    people.value.splice(people.value.indexOf(p), 1, p);
+  }
+
+  function populateList() {
+    for (let index = 0; index < 10; index++) {
+      const person: Person = {
+        firstName: faker.person.firstName(),
+        lastName: faker.person.lastName(),
+        email: faker.internet.email(),
+      };
+
+      addPerson(person);
+    }
+
+  }
+
+  return { people, addPerson, removePerson, editPerson, populateList };
+});
+
+export interface Person {
+  firstName: string;
+  lastName: string;
+  email: string;
+}

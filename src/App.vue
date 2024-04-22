@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import { usePeopleListStore } from './stores/peopleList'
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  usePeopleListStore().populateList()
+  console.log(usePeopleListStore().people)
+})
 </script>
 
 <template>
