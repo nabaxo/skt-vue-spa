@@ -6,7 +6,7 @@ export const usePeopleListStore = defineStore('people', () => {
   const people = ref<Person[]>([]);
 
   function addPerson(newPerson: Person) {
-    people.value.push(newPerson);
+    people.value.push({ ...newPerson, id: faker.string.uuid() });
   }
 
   function removePerson(p: Person) {
@@ -14,7 +14,12 @@ export const usePeopleListStore = defineStore('people', () => {
   }
 
   function editPerson(p: Person) {
-    people.value.splice(people.value.indexOf(p), 1, p);
+    const index = people.value.findIndex(person => p.id === person.id);
+    people.value.splice(index, 1, p);
+  }
+
+  function getPerson(id: string) {
+    return people.value.find(p => p.id === id);
   }
 
   function populateList() {
@@ -25,6 +30,7 @@ export const usePeopleListStore = defineStore('people', () => {
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
         email: faker.internet.email(),
+        id: faker.string.uuid(),
       };
 
       addPerson(person);
@@ -32,11 +38,12 @@ export const usePeopleListStore = defineStore('people', () => {
 
   }
 
-  return { people, addPerson, removePerson, editPerson, populateList };
+  return { people, addPerson, removePerson, editPerson, getPerson, populateList };
 });
 
 export interface Person {
   firstName: string;
   lastName: string;
   email: string;
+  id: string;
 }

@@ -2,12 +2,12 @@
 import { storeToRefs } from 'pinia'
 import { usePeopleListStore } from '../stores/peopleList'
 
-const peopleList = usePeopleListStore()
-const { people } = storeToRefs(peopleList)
+const peopleListStore = usePeopleListStore()
+const { people } = storeToRefs(peopleListStore)
 </script>
 
 <template>
-  <main class="h-full relative bg-slate-50 rounded-xl overflow-hidden dark:bg-slate-800/25">
+  <main class="h-full relative bg-slate-50 rounded-xl dark:bg-slate-800/25">
     <div class="shadow-sm my-8">
       <table class="table-auto border-2 w-full">
         <thead>
@@ -57,7 +57,12 @@ const { people } = storeToRefs(peopleList)
             <td
               class="border-b border-slate-100 dark:border-slate-700 p-4 text-blue-300 dark:text-slate-400 text-3xl font-black hover:scale-150 w-0 hover:cursor-default text-center"
             >
-              &#x270E;
+              <RouterLink
+                class="hover:bg-inherit"
+                :to="{ name: 'edit', params: { id: person.id } }"
+              >
+                &#x270E;
+              </RouterLink>
             </td>
             <td
               @click="usePeopleListStore().removePerson(person)"
